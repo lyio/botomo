@@ -58,7 +58,7 @@ resources :books
       get 'books' => 'books#index'
       post 'books' => 'books#create'
 
-      get 'goodreads' => 'goodreads#index'
+      get 'goodreads' => 'goodreads#search'
     end
   end
 
