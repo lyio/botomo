@@ -8,6 +8,7 @@ Bundler.require(*Rails.groups)
 
 module Botomo
   class Application < Rails::Application
+    #before_action :cors
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -22,6 +23,13 @@ module Botomo
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    config.middleware.insert_before 0, "Rack::Cors", :debug => true do
+      allow do
+        origins 'localhost:8088', ENV['CORS_HOST']
+        resource '*', :headers => :any, :methods => [:get, :post, :options, :head], :credentials => true
+      end
+    end
 
     # don't generate RSpec tests for views and helpers
   config.generators do |g|
