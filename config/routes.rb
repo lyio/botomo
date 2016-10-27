@@ -55,9 +55,18 @@ resources :books
   #   end
   namespace :api, defaults: {format: :json} do
     namespace :v1 do
-      resources :books, :only => [:index, :create]
+      get 'books' => 'books#index'
+      post 'books' => 'books#create'
 
       get 'goodreads' => 'goodreads#index'
     end
   end
+
+  # CORS
+#  match '*path', via: [:options], to:  lambda {|_| [204, {
+#    'Access-Control-Allow-Headers' => "Accept, Content-Type",
+#    'Access-Control-Allow-Origin' => "http://localhost:8088",
+#    'Access-Control-Allow-Credentials' => 'true',
+#    'Access-Control-Allow-Methods' => 'POST, GET, OPTIONS',
+#    'Content-Type' => 'text/plain'}, []]}
 end
