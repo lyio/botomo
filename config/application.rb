@@ -26,7 +26,7 @@ module Botomo
 
     config.middleware.insert_before 0, "Rack::Cors", :debug => true do
       allow do
-        origins 'localhost:8088', ENV['CORS_HOST']
+        origins 'localhost:8088', ENV['CORS_HOST'] || ''
         resource '*', :headers => :any, :methods => [:get, :post, :options, :head], :credentials => true
       end
     end
