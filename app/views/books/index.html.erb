@@ -2,33 +2,46 @@
 
 <h1>Listing Books</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>id</th>
-      <th>author</th>
-      <th>year</th>
-      <th>action</th>
-    </tr>
-  </thead>
+<div class="row">
+  <div class="col-lg-6">
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Search for...">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button">Go!</button>
+        <%= link_to "New Book".html_safe, new_book_path, :class=>"btn btn-md btn-primary" %>
+      </span>
+    </div><!-- /input-group -->
+  </div><!-- /.col-lg-6 -->
+</div><!-- /.row -->
 
-  <tbody>
-    <% @books.each do |book| %>
+<div class="col-md-6">
+  <table class="table">
+    <thead>
       <tr>
-        <td><%= book.id %></td>
-        <td><%= book.author %></td>
-        <td>
-          <%= book.year %>
-        </td>
-        <td>
-          <%= link_to 'Show', book %>
-          <%= link_to 'Edit', edit_book_path(book) %>
-        </td>
+        <th>author</th>
+        <th>title</th>
+        <th>year</th>
+        <th>action</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
-
-<%= link_to 'New Book', new_book_path %>
+    <tbody>
+      <% @books.each do |book| %>
+        <tr>
+          <td><%= book.author %></td>
+          <td>
+            <%= book.title %>
+            <br>
+            <%= book.subtitle %>
+           </td>
+          <td> <%= book.year %> </td>
+          <td>
+            <button type="button" class="btn btn-md btn-default">
+              <%= link_to 'Show', book %>
+            </button>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

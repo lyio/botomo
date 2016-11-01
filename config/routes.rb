@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
-
+  root 'books#index'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
-resources :books
+  resources :books, :only => [:create, :index, :show, :delete, :edit, :new]
 
   # Example resource route with options:
   #   resources :products do
@@ -61,12 +61,4 @@ resources :books
       get 'goodreads' => 'goodreads#search'
     end
   end
-
-  # CORS
-#  match '*path', via: [:options], to:  lambda {|_| [204, {
-#    'Access-Control-Allow-Headers' => "Accept, Content-Type",
-#    'Access-Control-Allow-Origin' => "http://localhost:8088",
-#    'Access-Control-Allow-Credentials' => 'true',
-#    'Access-Control-Allow-Methods' => 'POST, GET, OPTIONS',
-#    'Content-Type' => 'text/plain'}, []]}
 end
