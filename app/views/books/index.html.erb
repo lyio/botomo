@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Listing Books</h1>
 
 <div class="row">
@@ -21,6 +19,7 @@
         <th>author</th>
         <th>title</th>
         <th>year</th>
+        <th>created<th>
         <th>action</th>
       </tr>
     </thead>
@@ -35,6 +34,7 @@
             <%= book.subtitle %>
            </td>
           <td> <%= book.year %> </td>
+          <td> <%= time_ago_in_words(book.created_at) %> </td>
           <td>
             <button type="button" class="btn btn-md btn-default">
               <%= link_to 'Show', book %>

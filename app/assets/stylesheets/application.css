@@ -15,4 +15,5 @@
 
  *= require bootstrap
  *= require bootstrap-theme
+ *= require './book_form.css'
  */
