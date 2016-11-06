@@ -4,7 +4,13 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    @books = Book.all
+    @books = Book.search params[:search]
+
+    if @books.count == 0
+      flash[:notice] = "No books found, but you can submit a request. Do any of these match?"
+      @books = goodreads
+      render 'goodreads.html.erb'
+    end
   end
 
   # GET /books/1
@@ -48,6 +54,12 @@ class BooksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
-      params.require(:book).permit(:title, :subtitle, :author, :year)
+        params.require(:book).permit(:title, :subtitle, :author, :year, :image)
+    end
+
+    def goodreads
+      @books = Goodreads.query(params[:search]).map do |b|
+        Book.new b
+      end
     end
 end
