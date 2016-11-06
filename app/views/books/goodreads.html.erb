@@ -1,4 +1,4 @@
-<h1>Listing Books</h1>
+<h1>Found the following matches</h1>
 
 <div class="row">
   <div class="col-lg-6">
@@ -23,7 +23,6 @@
         <th>author</th>
         <th>title</th>
         <th>year</th>
-        <th>created<th>
         <th>action</th>
       </tr>
     </thead>
@@ -31,9 +30,13 @@
     <tbody>
       <% @books.each do |book| %>
         <tr>
-          <td>
-            <%= image_tag(book.image) if book.image %>
-          </td>
+          <%= form_for book do |b| %>
+            <%= b.hidden_field(:author, :value => book.author) %>
+            <%= b.hidden_field(:title, :value => book.title) %>
+            <%= b.hidden_field(:year, :value => book.year) %>
+            <%= b.hidden_field(:image, :value => book.image) %>
+
+          <td> <%= image_tag(book.image) %> <td>
           <td><%= book.author %></td>
           <td>
             <%= book.title %>
@@ -41,12 +44,10 @@
             <%= book.subtitle %>
            </td>
           <td> <%= book.year %> </td>
-          <td> <%= time_ago_in_words(book.created_at) %> </td>
           <td>
-            <button type="button" class="btn btn-md btn-default">
-              <%= link_to 'Show', book %>
-            </button>
+            <%= b.submit :class => "new_button btn btn-default" %>
           </td>
+          <% end %>
         </tr>
       <% end %>
     </tbody>
